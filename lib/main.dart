@@ -59,6 +59,11 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text("Create Account"),
               color: Colors.blue,
             ),
+            FlatButton(
+              onPressed: () => _logOut(),
+              child: Text("Sign Out"),
+              color: Colors.greenAccent,
+            ),
             new Image.network(
                 _imageUrl == null || _imageUrl.isEmpty ? "https://images.unsplash.com/photo-1486565273886-f8309bda62b6?ixlib=rb-0.3.5&s=ea2bdbe674ed5c1558d24c9c08af2891&auto=format&fit=crop&w=500&q=60" : _imageUrl,
               width: 250.0,
@@ -87,6 +92,13 @@ class _MyHomePageState extends State<MyHomePage> {
     FirebaseUser user = await _auth.createUserWithEmailAndPassword(email: "aksjames@gmail.com", password: "test123456").then((user){
       print("User Created ${user.displayName}");
       print("Email: ${user.email}");
+    });
+  }
+
+  _logOut() {
+    setState(() {
+      _googleSignIn.signOut();
+      _imageUrl = "https://images.unsplash.com/photo-1486565273886-f8309bda62b6?ixlib=rb-0.3.5&s=ea2bdbe674ed5c1558d24c9c08af2891&auto=format&fit=crop&w=500&q=60";
     });
   }
 }
