@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             FlatButton(
               child: Text("Signin with Email"),
-              onPressed: () => {},
+              onPressed: () => _signInWithEmail(),
               color: Colors.orange,
             ),
             FlatButton(
@@ -60,8 +60,13 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.blue,
             ),
             FlatButton(
-              onPressed: () => _logOut(),
-              child: Text("Sign Out"),
+              onPressed: () => _gmailogOut(),
+              child: Text("Google Sign Out"),
+              color: Colors.greenAccent,
+            ),
+            FlatButton(
+              onPressed: () => _emailogOut(),
+              child: Text("Email Sign Out"),
               color: Colors.greenAccent,
             ),
             new Image.network(
@@ -95,10 +100,20 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  _logOut() {
+  _gmailogOut() {
     setState(() {
       _googleSignIn.signOut();
       _imageUrl = "https://images.unsplash.com/photo-1486565273886-f8309bda62b6?ixlib=rb-0.3.5&s=ea2bdbe674ed5c1558d24c9c08af2891&auto=format&fit=crop&w=500&q=60";
     });
+  }
+
+  _signInWithEmail() {
+    _auth.signInWithEmailAndPassword(email: "aksjames@gmail.com", password: "test123456").then((newUser){
+      print("User is Signed in: ${newUser.email}");
+    });
+  }
+
+  _emailogOut() {
+    _auth.signOut();
   }
 }
