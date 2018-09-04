@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.orange,
             ),
             FlatButton(
-              onPressed: () => {},
+              onPressed: () => _createUser(),
               child: Text("Create Account"),
               color: Colors.blue,
             ),
@@ -81,5 +81,12 @@ class _MyHomePageState extends State<MyHomePage> {
       _imageUrl = user.photoUrl;
     });
     return user;
+  }
+
+  Future _createUser() async{
+    FirebaseUser user = await _auth.createUserWithEmailAndPassword(email: "aksjames@gmail.com", password: "test123456").then((user){
+      print("User Created ${user.displayName}");
+      print("Email: ${user.email}");
+    });
   }
 }
